@@ -4,6 +4,8 @@
 *.txt
 *.pth
 *.xml
+counting_results*
+metrics.json
 events.*
 last_checkpoint
 # Byte-compiled / optimized / DLL files
