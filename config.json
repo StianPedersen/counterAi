@@ -1,12 +1,17 @@
 {
     "data": {
-        "images_path": "data/images",
-        "labels_path": "data/labels",
+        "images_path": "data_xml/images",
+        "labels_path": "data_xml/labels",
+        "source_label_format": "xml",
         "class_mapping": {
-            "0": "red_box"
+            "0": "lbattery",
+            "1": "cylinder",
+            "2": "mbattery"
         },
         "target_classes": [
-            "red_box"
+            "lbattery",
+            "cylinder",
+            "mbattery"
         ],
         "train_split": 0.8
     },
@@ -14,7 +19,7 @@
         "confidence_threshold": 0.9,
         "nms_threshold": 0.7,
         "model_config": "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml",
-        "num_classes": 1,
+        "num_classes": 3,
         "max_iter": 3000,
         "batch_size": 2,
         "learning_rate": 0.00025
@@ -25,21 +30,21 @@
         "tracker_type": "deepsort"
     },
     "counting_line": {
-        "type": "vertical",
+        "type": "horizontal",
         "position": "middle",
         "coordinates": [
-            320,
             0,
-            320,
-            480
+            240,
+            640,
+            240
         ],
-        "direction": "left_to_right"
+        "direction": "bottom_to_top"
     },
     "counting": {
         "enable_size_filter": false,
         "min_object_size": 0,
         "enable_confidence_filter": true,
-        "min_confidence": 0.9
+        "min_confidence": 0.6
     },
     "output": {
         "save_video": true,
@@ -49,7 +54,7 @@
         "log_level": "INFO"
     },
     "performance": {
-        "target_fps": 5,
+        "target_fps": 1,
         "device": "cuda"
     }
-}
+} 

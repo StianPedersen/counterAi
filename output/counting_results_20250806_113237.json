@@ -1,7 +1,7 @@
 {
   "summary": {
-    "session_start": "2025-08-06T09:10:39.695498",
-    "session_duration_seconds": 42.573202,
+    "session_start": "2025-08-06T11:32:11.073633",
+    "session_duration_seconds": 26.462102,
     "total_count": 0,
     "count_by_direction": {
       "left_to_right": 0,
@@ -12,9 +12,11 @@
     "unique_objects_counted": 0,
     "counting_rate_per_minute": 0.0,
     "target_classes": [
-      "red_box"
+      "lbattery",
+      "cylinder",
+      "mbattery"
     ],
-    "confidence_threshold": 0.9
+    "confidence_threshold": 0.6
   },
   "counting_log": []
 }

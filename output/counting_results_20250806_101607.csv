@@ -1,3 +1,0 @@
-timestamp,object_id,direction,centroid_x,centroid_y,confidence,class_name,frame_number,total_count
-2025-08-06T10:15:58.381766,0,left_to_right,964,389,0.9999233484268188,red_box,10,1
-2025-08-06T10:16:05.446623,1,left_to_right,966,776,0.9989725351333618,red_box,67,2

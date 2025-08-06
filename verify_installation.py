@@ -49,7 +49,7 @@ def test_basic_components():
         return False
     
     try:
-        from data_conversion import YOLOToDetectron2Converter
+        from data_conversion import YOLOToDetectron2Converter, XMLToDetectron2Converter, DataConverter
         print("✓ Data conversion")
     except ImportError as e:
         print(f"✗ Data conversion: {e}")

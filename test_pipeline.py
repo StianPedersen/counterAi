@@ -32,7 +32,7 @@ def test_data_conversion():
         pipeline.setup_pipeline()
         
         # Test data conversion
-        dataset_name = pipeline.data_converter.convert_yolo_to_detectron()
+        dataset_name = pipeline.data_converter.convert_to_detectron()
         train_name, val_name = pipeline.data_converter.split_dataset(dataset_name)
         
         print(f"✓ Data conversion successful: {dataset_name}")

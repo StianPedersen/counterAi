@@ -22,7 +22,7 @@ counter_ai/
 ├── crossing_detection/ # Line crossing detection logic  
 ├── counting/          # Object counting and statistics
 ├── utils/             # Configuration and logging
-├── data_conversion/   # YOLOv8 to Detectron2 conversion
+├── data_conversion/   # YOLO/XML to Detectron2 conversion
 └── main_pipeline.py   # Main orchestrator
 ```
 
@@ -106,17 +106,64 @@ pipeline.live_camera_processing(camera_index=0)
 
 ## Data Format
 
-### Input Data Structure
+The system supports both YOLO and XML annotation formats. Configure the format in `config.json`:
+
+```json
+{
+  "data": {
+    "source_label_format": "yolo",  // or "xml"
+    "images_path": "data/images",
+    "labels_path": "data/labels",
+    "class_mapping": {
+      "0": "red_box",
+      "1": "blue_box", 
+      "2": "battery"
+    },
+    "target_classes": ["red_box", "blue_box", "battery"]
+  },
+  "detection": {
+    "num_classes": 3  // Must match number of classes
+  }
+}
+```
+
+### YOLO Format (Default)
 ```
 data/
 ├── images/           # PNG images (frame_0001.png, etc.)
 └── labels/           # YOLOv8 format labels (frame_0001.txt, etc.)
 ```
 
-### Label Format (YOLOv8)
+**Label Format:**
 ```
 class_id center_x center_y width height
 0 0.431262 0.186851 0.037649 0.069180
+```
+
+### XML Format
+```
+data_xml/
+├── images/           # PNG images (2025-07-02--11-28-19-950612.png, etc.)
+└── labels/           # XML annotations (2025-07-02--11-28-19-950612.xml, etc.)
+```
+
+**Label Format:**
+```xml
+<annotation>
+  <size>
+    <width>2592</width>
+    <height>1944</height>
+  </size>
+  <object>
+    <name>red_box</name>
+    <bndbox>
+      <xmin>176</xmin>
+      <ymin>1593</ymin>
+      <xmax>702</xmax>
+      <ymax>1944</ymax>
+    </bndbox>
+  </object>
+</annotation>
 ```
 
 ### Output Results

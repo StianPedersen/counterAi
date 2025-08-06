@@ -4,7 +4,7 @@ import os
 import time
 from typing import Optional, Dict, Any
 from utils import Config, CounterLogger
-from data_conversion import YOLOToDetectron2Converter
+from data_conversion import DataConverter
 from detection import RedBoxDetector
 from tracking import MultiObjectTracker
 from line_definition import CountingLine
@@ -31,7 +31,7 @@ class CounterAIPipeline:
     
     def setup_pipeline(self):
         try:
-            self.data_converter = YOLOToDetectron2Converter(self.config)
+            self.data_converter = DataConverter(self.config)
             self.detector = RedBoxDetector(self.config)
             self.tracker = MultiObjectTracker(self.config)
             self.counting_line = CountingLine(self.config)
@@ -53,10 +53,10 @@ class CounterAIPipeline:
         self.logger.info("Starting model training pipeline...")
         
         try:
-            dataset_name = self.data_converter.convert_yolo_to_detectron()
+            dataset_name = self.data_converter.convert_to_detectron()
             train_name, val_name = self.data_converter.split_dataset(dataset_name)
             
-            self.detector.setup_config(dataset_name, num_classes=1)
+            self.detector.setup_config(dataset_name, num_classes=self.config.get("detection.num_classes", 1))
             
             model_path = self.detector.train(dataset_name)
             
@@ -79,8 +79,8 @@ class CounterAIPipeline:
             self.setup_pipeline()
         
         try:
-            dataset_name = self.data_converter.convert_yolo_to_detectron()
-            self.detector.setup_config(dataset_name, num_classes=1)
+            dataset_name = self.data_converter.convert_to_detectron()
+            self.detector.setup_config(dataset_name, num_classes=self.config.get("detection.num_classes", 1))
             self.detector.load_model(model_path)
             
             self.is_trained = True

@@ -14,7 +14,7 @@ from pathlib import Path
 from main_pipeline import CounterAIPipeline
 from utils import Config
 
-def validate_data_paths(images_path, labels_path):
+def validate_data_paths(images_path, labels_path, label_format="yolo"):
     """Validate that data paths exist and contain files"""
     if not os.path.exists(images_path):
         print(f"❌ Error: Images directory '{images_path}' not found")
@@ -24,19 +24,25 @@ def validate_data_paths(images_path, labels_path):
         print(f"❌ Error: Labels directory '{labels_path}' not found")
         return False
     
-    # Count files
+    # Count files based on label format
     image_files = [f for f in os.listdir(images_path) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
-    label_files = [f for f in os.listdir(labels_path) if f.lower().endswith('.txt')]
+    
+    if label_format.lower() == "xml":
+        label_files = [f for f in os.listdir(labels_path) if f.lower().endswith('.xml')]
+        format_desc = "XML"
+    else:
+        label_files = [f for f in os.listdir(labels_path) if f.lower().endswith('.txt')]
+        format_desc = "YOLO"
     
     if len(image_files) == 0:
         print(f"❌ Error: No image files found in '{images_path}'")
         return False
     
     if len(label_files) == 0:
-        print(f"❌ Error: No label files found in '{labels_path}'")
+        print(f"❌ Error: No {format_desc} label files found in '{labels_path}'")
         return False
     
-    print(f"📊 Dataset validation:")
+    print(f"📊 Dataset validation ({format_desc} format):")
     print(f"  Images: {len(image_files)} files")
     print(f"  Labels: {len(label_files)} files")
     
@@ -70,24 +76,24 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s                                    # Use default data paths
-  %(prog)s --images custom/images --labels custom/labels
+  %(prog)s                                    # Use paths from config.json
+  %(prog)s --images custom/images --labels custom/labels  # Override config paths
   %(prog)s --max-iter 5000 --batch-size 4    # Custom training parameters
-  %(prog)s --config custom_config.json       # Use custom configuration
+  %(prog)s --config custom_config.json       # Use custom configuration file
   %(prog)s --resume output/model_0001000.pth # Resume from checkpoint
         """
     )
     
     parser.add_argument(
         "--images",
-        default="data/images",
-        help="Path to images directory (default: data/images)"
+        default=None,
+        help="Path to images directory (default: use config.json)"
     )
     
     parser.add_argument(
         "--labels", 
-        default="data/labels",
-        help="Path to labels directory (default: data/labels)"
+        default=None,
+        help="Path to labels directory (default: use config.json)"
     )
     
     parser.add_argument(
@@ -143,7 +149,14 @@ Examples:
     print("=" * 40)
     
     # Validate data paths
-    if not validate_data_paths(args.images, args.labels):
+    # Load config first to get the correct paths
+    config = Config(args.config)
+    
+    # Use command line args if provided, otherwise use config
+    images_path = args.images if args.images else config.get("data.images_path")
+    labels_path = args.labels if args.labels else config.get("data.labels_path")
+    
+    if not validate_data_paths(images_path, labels_path, config.get("data.source_label_format", "yolo")):
         sys.exit(1)
     
     if args.validate_only:
@@ -168,11 +181,10 @@ Examples:
     os.makedirs(args.output_dir, exist_ok=True)
     
     try:
-        # Initialize pipeline with custom config
+        # Initialize pipeline with custom config (already loaded above)
         print("\n🔧 Initializing training pipeline...")
-        config = Config(args.config)
         
-        # Override config with command line arguments
+        # Override config with command line arguments (only if provided)
         if args.max_iter:
             config.set("detection.max_iter", args.max_iter)
         if args.batch_size:
@@ -180,9 +192,11 @@ Examples:
         if args.learning_rate:
             config.set("detection.learning_rate", args.learning_rate)
         
-        # Update data paths in config
-        config.set("data.images_path", args.images)
-        config.set("data.labels_path", args.labels)
+        # Override data paths only if explicitly provided via command line
+        if args.images:
+            config.set("data.images_path", args.images)
+        if args.labels:
+            config.set("data.labels_path", args.labels)
         
         pipeline = CounterAIPipeline(args.config)
         pipeline.setup_pipeline()
@@ -191,14 +205,16 @@ Examples:
         print("\n⚙️  Training Configuration:")
         print(f"  Images path: {config.get('data.images_path')}")
         print(f"  Labels path: {config.get('data.labels_path')}")
+        print(f"  Label format: {config.get('data.source_label_format', 'yolo')}")
         print(f"  Max iterations: {config.get('detection.max_iter')}")
         print(f"  Batch size: {config.get('detection.batch_size')}")
         print(f"  Learning rate: {config.get('detection.learning_rate')}")
         print(f"  Target classes: {config.get('data.target_classes')}")
+        print(f"  Number of classes: {config.get('detection.num_classes')}")
         print(f"  Output directory: {args.output_dir}")
         
         # Count images for time estimation
-        image_files = [f for f in os.listdir(args.images) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+        image_files = [f for f in os.listdir(config.get('data.images_path')) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
         estimate_training_time(len(image_files), config.get('detection.max_iter'))
         
         # Confirm training start
@@ -266,8 +282,10 @@ Examples:
     except Exception as e:
         print(f"\n❌ Training failed: {e}")
         print("\n🔍 Troubleshooting tips:")
-        print("  - Check data format (YOLOv8 format required)")
+        print("  - Check data format matches config (YOLO .txt or XML .xml)")
         print("  - Verify image and label file counts match")
+        print("  - Ensure class names in XML match class_mapping in config")
+        print("  - Check num_classes matches number of classes in data")
         print("  - Ensure sufficient disk space")
         print("  - Check CUDA/GPU availability")
         sys.exit(1)

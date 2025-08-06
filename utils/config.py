@@ -57,13 +57,16 @@ class Config:
             }
         }
         
-        if os.path.exists(self.config_path):
+        config_exists = os.path.exists(self.config_path)
+        if config_exists:
             with open(self.config_path, 'r') as f:
                 loaded_config = json.load(f)
                 self._merge_configs(default_config, loaded_config)
         
         self.config = default_config
-        self.save_config()
+        # Only save config if it was created from defaults (file didn't exist)
+        if not config_exists:
+            self.save_config()
     
     def _merge_configs(self, default: Dict, loaded: Dict):
         for key, value in loaded.items():
@@ -72,6 +75,9 @@ class Config:
                     self._merge_configs(default[key], value)
                 else:
                     default[key] = value
+            else:
+                # Add new keys that don't exist in default config
+                default[key] = value
     
     def save_config(self):
         with open(self.config_path, 'w') as f:

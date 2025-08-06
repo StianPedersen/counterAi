@@ -3,6 +3,9 @@
 *.mp4
 *.txt
 *.pth
+*.xml
+events.*
+last_checkpoint
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
