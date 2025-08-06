@@ -1,0 +1,20 @@
+{
+  "summary": {
+    "session_start": "2025-08-06T09:10:39.695498",
+    "session_duration_seconds": 42.573202,
+    "total_count": 0,
+    "count_by_direction": {
+      "left_to_right": 0,
+      "right_to_left": 0,
+      "top_to_bottom": 0,
+      "bottom_to_top": 0
+    },
+    "unique_objects_counted": 0,
+    "counting_rate_per_minute": 0.0,
+    "target_classes": [
+      "red_box"
+    ],
+    "confidence_threshold": 0.9
+  },
+  "counting_log": []
+}

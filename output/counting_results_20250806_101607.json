@@ -1,0 +1,47 @@
+{
+  "summary": {
+    "session_start": "2025-08-06T10:15:46.363989",
+    "session_duration_seconds": 20.737645,
+    "total_count": 2,
+    "count_by_direction": {
+      "left_to_right": 2,
+      "right_to_left": 0,
+      "top_to_bottom": 0,
+      "bottom_to_top": 0
+    },
+    "unique_objects_counted": 2,
+    "counting_rate_per_minute": 5.786577984144294,
+    "target_classes": [
+      "red_box"
+    ],
+    "confidence_threshold": 0.9
+  },
+  "counting_log": [
+    {
+      "timestamp": "2025-08-06T10:15:58.381766",
+      "object_id": 0,
+      "direction": "left_to_right",
+      "centroid": [
+        964,
+        389
+      ],
+      "confidence": 0.9999233484268188,
+      "class_name": "red_box",
+      "frame_number": 10,
+      "total_count": 1
+    },
+    {
+      "timestamp": "2025-08-06T10:16:05.446623",
+      "object_id": 1,
+      "direction": "left_to_right",
+      "centroid": [
+        966,
+        776
+      ],
+      "confidence": 0.9989725351333618,
+      "class_name": "red_box",
+      "frame_number": 67,
+      "total_count": 2
+    }
+  ]
+}

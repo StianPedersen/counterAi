@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "session_start": "2025-08-06T09:17:51.692177",
+    "session_duration_seconds": 41.708198,
+    "total_count": 10,
+    "count_by_direction": {
+      "left_to_right": 10,
+      "right_to_left": 0,
+      "top_to_bottom": 0,
+      "bottom_to_top": 0
+    },
+    "unique_objects_counted": 10,
+    "counting_rate_per_minute": 14.385661063563571,
+    "target_classes": [
+      "red_box"
+    ],
+    "confidence_threshold": 0.9
+  },
+  "counting_log": [
+    {
+      "timestamp": "2025-08-06T09:18:03.309976",
+      "object_id": 0,
+      "direction": "left_to_right",
+      "centroid": [
+        964,
+        389
+      ],
+      "confidence": 

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <style>
+      .node { fill: #ffffff; stroke: #333333; stroke-width: 2; }
+      .text { font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+      .title { font-weight: bold; font-size: 14px; }
+      .arrow { stroke: #333333; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      
+      .input { fill: #e1f5fe; }
+      .detection { fill: #f3e5f5; }
+      .tracking { fill: #e8f5e8; }
+      .crossing { fill: #fff3e0; }
+      .counting { fill: #fce4ec; }
+      .output { fill: #f1f8e9; }
+      .data { fill: #e0f2f1; }
+      .conversion { fill: #e8eaf6; }
+      .training { fill: #fff8e1; }
+      .config { fill: #f9fbe7; }
+      .line { fill: #fdf2d5; }
+      .viz { fill: #e8f5e8; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333333" />
+    </marker>
+  </defs>
+  
+  <!-- Main Pipeline Flow -->
+  <!-- Video Input -->
+  <rect x="50" y="50" width="120" height="60" class="node input" rx="10"/>
+  <text x="110" y="75" class="text title">Video Input</text>
+  <text x="110" y="90" class="text">📹</text>
+  
+  <!-- Object Detection -->
+  <rect x="220" y="50" width="120" height="60" class="node detection" rx="10"/>
+  <text x="280" y="70" class="text title">Object Detection</text>
+  <text x="280" y="85" class="text">🔍 Detectron2</text>
+  <text x="280" y="100" class="text">Faster R-CNN</text>
+  
+  <!-- Multi-Object Tracking -->
+  <rect x="390" y="50" width="120" height="60" class="node tracking" rx="10"/>
+  <text x="450" y="70" class="text title">Multi-Object</text>
+  <text x="450" y="85" class="text title">Tracking</text>
+  <text x="450" y="100" class="text">🎯 DeepSORT</text>
+  
+  <!-- Line Crossing Detection -->
+  <rect x="560" y="50" width="120" height="60" class="node crossing" rx="10"/>
+  <text x="620" y="70" class="text title">Line Crossing</text>
+  <text x="620" y="85" class="text title">Detection</text>
+  <text x="620" y="100" class="text">📏 Trajectory</text>
+  
+  <!-- Object Counting -->
+  <rect x="390" y="150" width="120" height="60" class="node counting" rx="10"/>
+  <text x="450" y="170" class="text title">Object Counting</text>
+  <text x="450" y="185" class="text">📊 ID Tracking</text>
+  <text x="450" y="200" class="text">Anti-double count</text>
+  
+  <!-- Results Export -->
+  <rect x="220" y="150" width="120" height="60" class="node output" rx="10"/>
+  <text x="280" y="170" class="text title">Results Export</text>
+  <text x="280" y="185" class="text">💾 CSV/JSON</text>
+  <text x="280" y="200" class="text">Statistics</text>
+  
+  <!-- Training Data Flow -->
+  <!-- Training Data -->
+  <rect x="50" y="250" width="120" height="60" class="node data" rx="10"/>
+  <text x="110" y="270" class="text title">Training Data</text>
+  <text x="110" y="285" class="text">📂 YOLOv8 Format</text>
+  <text x="110" y="300" class="text">290 Images</text>
+  
+  <!-- Data Conversion -->
+  <rect x="220" y="250" width="120" height="60" class="node conversion" rx="10"/>
+  <text x="280" y="270" class="text title">Data Conversion</text>
+  <text x="280" y="285" class="text">🔄 Detectron2</text>
+  <text x="280" y="300" class="text">Format</text>
+  
+  <!-- Model Training -->
+  <rect x="390" y="250" width="120" height="60" class="node training" rx="10"/>
+  <text x="450" y="270" class="text title">Model Training</text>
+  <text x="450" y="285" class="text">🎓 Red Box</text>
+  <text x="450" y="300" class="text">Detection</text>
+  
+  <!-- Configuration Flow -->
+  <!-- Configuration -->
+  <rect x="50" y="350" width="120" height="60" class="node config" rx="10"/>
+  <text x="110" y="370" class="text title">Configuration</text>
+  <text x="110" y="385" class="text">⚙️ config.json</text>
+  <text x="110" y="400" class="text">Thresholds</text>
+  
+  <!-- Counting Line -->
+  <rect x="220" y="350" width="120" height="60" class="node line" rx="10"/>
+  <text x="280" y="370" class="text title">Counting Line</text>
+  <text x="280" y="385" class="text">📐 Vertical</text>
+  <text x="280" y="400" class="text">Left-to-Right</text>
+  
+  <!-- Live Camera -->
+  <rect x="50" y="450" width="120" height="60" class="node input" rx="10"/>
+  <text x="110" y="470" class="text title">Live Camera</text>
+  <text x="110" y="485" class="text">📷 Real-time</text>
+  <text x="110" y="500" class="text">5 FPS</text>
+  
+  <!-- Visualization -->
+  <rect x="560" y="150" width="120" height="60" class="node viz" rx="10"/>
+  <text x="620" y="170" class="text title">Visualization</text>
+  <text x="620" y="185" class="text">👁️ Real-time</text>
+  <text x="620" y="200" class="text">Display</text>
+  
+  <!-- Arrows for Main Pipeline -->
+  <line x1="170" y1="80" x2="220" y2="80" class="arrow"/>
+  <line x1="340" y1="80" x2="390" y2="80" class="arrow"/>
+  <line x1="510" y1="80" x2="560" y2="80" class="arrow"/>
+  <line x1="620" y1="110" x2="620" y2="130" class="arrow"/>
+  <line x1="600" y1="150" x2="560" y2="150" class="arrow"/>
+  <line x1="510" y1="180" x2="560" y2="180" class="arrow"/>
+  <line x1="390" y1="180" x2="340" y2="180" class="arrow"/>
+  
+  <!-- Arrows for Training Flow -->
+  <line x1="170" y1="280" x2="220" y2="280" class="arrow"/>
+  <line x1="340" y1="280" x2="390" y2="280" class="arrow"/>
+  <line x1="450" y1="250" x2="450" y2="230" class="arrow"/>
+  <line x1="430" y1="230" x2="300" y2="110" class="arrow"/>
+  
+  <!-- Arrows for Configuration -->
+  <line x1="170" y1="380" x2="220" y2="380" class="arrow"/>
+  <line x1="280" y1="350" x2="280" y2="330" class="arrow"/>
+  <line x1="300" y1="330" x2="600" y2="110" class="arrow"/>
+  
+  <!-- Config to other components -->
+  <line x1="110" y1="350" x2="110" y2="330" class="arrow"/>
+  <line x1="130" y1="330" x2="260" y2="110" class="arrow"/>
+  <line x1="150" y1="330" x2="430" y2="110" class="arrow"/>
+  <line x1="170" y1="330" x2="430" y2="210" class="arrow"/>
+  
+  <!-- Live Camera -->
+  <line x1="170" y1="480" x2="200" y2="480" class="arrow"/>
+  <line x1="200" y1="480" x2="200" y2="80" class="arrow"/>
+  <line x1="200" y1="80" x2="220" y2="80" class="arrow"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" class="text title" style="font-size: 20px; fill: #2c3e50;">CounterAI System Architecture</text>
+  
+  <!-- Legend -->
+  <rect x="20" y="530" width="760" height="60" fill="#f8f9fa" stroke="#dee2e6" rx="5"/>
+  <text x="30" y="545" class="text" style="font-size: 10px; text-anchor: start;">Pipeline Flow: Video Input → Detection → Tracking → Line Crossing → Counting → Export</text>
+  <text x="30" y="560" class="text" style="font-size: 10px; text-anchor: start;">Training Flow: YOLOv8 Data → Conversion → Detectron2 Training → Model Deployment</text>
+  <text x="30" y="575" class="text" style="font-size: 10px; text-anchor: start;">Configuration: config.json controls detection thresholds, counting line position, and output settings</text>
+</svg> 

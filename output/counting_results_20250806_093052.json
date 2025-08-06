@@ -1,0 +1,151 @@
+{
+  "summary": {
+    "session_start": "2025-08-06T09:30:11.555064",
+    "session_duration_seconds": 41.203369,
+    "total_count": 10,
+    "count_by_direction": {
+      "left_to_right": 10,
+      "right_to_left": 0,
+      "top_to_bottom": 0,
+      "bottom_to_top": 0
+    },
+    "unique_objects_counted": 10,
+    "counting_rate_per_minute": 14.561916041380014,
+    "target_classes": [
+      "red_box"
+    ],
+    "confidence_threshold": 0.9
+  },
+  "counting_log": [
+    {
+      "timestamp": "2025-08-06T09:30:22.716847",
+      "object_id": 0,
+      "direction": "left_to_right",
+      "centroid": [
+        964,
+        389
+      ],
+      "confidence": 0.9999233484268188,
+      "class_name": "red_box",
+      "frame_number": 10,
+      "total_count": 1
+    },
+    {
+      "timestamp": "2025-08-06T09:30:29.748516",
+      "object_id": 1,
+      "direction": "left_to_right",
+      "centroid": [
+        966,
+        776
+      ],
+      "confidence": 0.9989725351333618,
+      "class_name": "red_box",
+      "frame_number": 67,
+      "total_count": 2
+    },
+    {
+      "timestamp": "2025-08-06T09:30:33.633048",
+      "object_id": 2,
+      "direction": "left_to_right",
+      "centroid": [
+        972,
+        419
+      ],
+      "confidence": 0.9999121427536011,
+      "class_name": "red_box",
+      "frame_number": 98,
+      "total_count": 3
+    },
+    {
+      "timestamp": "2025-08-06T09:30:35.263887",
+      "object_id": 3,
+      "direction": "left_to_right",
+      "centroid": [
+        961,
+        228
+      ],
+      "confidence": 0.9999045133590698,
+      "class_name": "red_box",
+      "frame_number": 111,
+      "total_count": 4
+    },
+    {
+      "timestamp": "2025-08-06T09:30:42.758403",
+      "object_id": 4,
+      "direction": "left_to_right",
+      "centroid": [
+        964,
+        567
+      ],
+      "confidence": 0.9954683780670166,
+      "class_name": "red_box",
+      "frame_number": 171,
+      "total_count": 5
+    },
+    {
+      "timestamp": "2025-08-06T09:30:43.138258",
+      "object_id": 5,
+      "direction": "left_to_right",
+      "centroid": [
+        970,
+        331
+      ],
+      "confidence": 0.999909520149231,
+      "class_name": "red_box",
+      "frame_number": 174,
+      "total_count": 6
+    },
+    {
+      "timestamp": "2025-08-06T09:30:46.023216",
+      "object_id": 6,
+      "direction": "left_to_right",
+      "centroid": [
+        975,
+        673
+      ],
+      "confidence": 0.9998799562454224,
+      "class_name": "red_box",
+      "frame_number": 197,
+      "total_count": 7
+    },
+    {
+      "timestamp": "2025-08-06T09:30:49.309782",
+      "object_id": 7,
+      "direction": "left_to_right",
+      "centroid": [
+        965,
+        594
+      ],
+      "confidence": 0.9998806715011597,
+      "class_name": "red_box",
+      "frame_number": 223,
+      "total_count": 8
+    },
+    {
+      "timestamp": "2025-08-06T09:30:50.070886",
+      "object_id": 8,
+      "direction": "left_to_right",
+      "centroid": [
+        976,
+        766
+      ],
+      "confidence": 0.9999169111251831,
+      "class_name": "red_box",
+      "frame_number": 229,
+      "total_count": 9
+    },
+    {
+      "timestamp": "2025-08-06T09:30:50.831636",
+      "object_id": 9,
+      "direction": "left_to_right",
+      "centroid": [
+        968,
+        241
+      ],
+      "confidence": 0.9999428987503052,
+      "class_name": "red_box",
+      "frame_number": 235,
+      "total_count": 10
+    }
+  ]
+}

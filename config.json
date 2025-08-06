@@ -1,0 +1,55 @@
+{
+    "data": {
+        "images_path": "data/images",
+        "labels_path": "data/labels",
+        "class_mapping": {
+            "0": "red_box"
+        },
+        "target_classes": [
+            "red_box"
+        ],
+        "train_split": 0.8
+    },
+    "detection": {
+        "confidence_threshold": 0.9,
+        "nms_threshold": 0.7,
+        "model_config": "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml",
+        "num_classes": 1,
+        "max_iter": 3000,
+        "batch_size": 2,
+        "learning_rate": 0.00025
+    },
+    "tracking": {
+        "max_disappeared": 30,
+        "max_distance": 50,
+        "tracker_type": "deepsort"
+    },
+    "counting_line": {
+        "type": "vertical",
+        "position": "middle",
+        "coordinates": [
+            320,
+            0,
+            320,
+            480
+        ],
+        "direction": "left_to_right"
+    },
+    "counting": {
+        "enable_size_filter": false,
+        "min_object_size": 0,
+        "enable_confidence_filter": true,
+        "min_confidence": 0.9
+    },
+    "output": {
+        "save_video": true,
+        "save_csv": true,
+        "show_realtime": true,
+        "output_dir": "output",
+        "log_level": "INFO"
+    },
+    "performance": {
+        "target_fps": 5,
+        "device": "cuda"
+    }
+}
